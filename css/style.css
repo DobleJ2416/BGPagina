@@ -1,27 +1,18 @@
-/* ==============================
-    ESTILOS CSS 
-    ============================== */
 :root {
     --primary-blue: #007BFF;
     --neon-blue: #00F3FF; 
     --dark-bg: #080808;
-    --dark-card-bg: #1a1a1a;
+    --dark-card-bg: #111;
     --text-light: #ffffff;
     --text-muted: #a0a0a0;
     --glass-bg: rgba(26, 26, 26, 0.7);
     --glass-border: rgba(255, 255, 255, 0.1);
-    
-    /* Brillo de cajas */
     --neon-box-glow: 0 0 15px rgba(0, 243, 255, 0.3), 0 0 30px rgba(0, 123, 255, 0.2);
-    
-    /* --- NEÓN NIVEL 3 (El que elegiste) --- */
     --subtle-text-glow: 0 0 5px rgba(0, 243, 255, 0.8), 0 0 15px rgba(0, 123, 255, 0.5);
 }
 
 html {
-    /* Desplazamiento suave al hacer clic en el menú */
     scroll-behavior: smooth;
-    /* Evita que el header fijo tape el título al desplazarse */
     scroll-padding-top: 80px; 
 }
 
@@ -29,20 +20,31 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
     background-color: var(--dark-bg);
     color: var(--text-light);
     line-height: 1.6;
-    background-image: radial-gradient(circle at top, #141a26 0%, var(--dark-bg) 70%);
+    /* Tipografía secundaria global */
+    font-family: 'Inter', sans-serif; 
+    
+    /* Fondo con textura de cuadrícula Blueprint */
+    background-image: 
+        linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
     overflow-x: hidden;
 }
 
-/* --- Cabecera --- */
+/* Tipografía de Títulos */
+h1, h2, .section-title, .project-type-label, .platform-btn, nav a {
+    font-family: 'Orbitron', sans-serif;
+}
+
 header {
-    background-color: rgba(8, 8, 8, 0.85); /* Un poco más oscuro para mejor lectura del menú */
+    background-color: rgba(8, 8, 8, 0.9);
     padding: 1.2rem 5%;
     display: flex;
     justify-content: space-between; 
@@ -55,98 +57,84 @@ header {
     backdrop-filter: blur(10px);
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-}
-
+nav ul { list-style: none; display: flex; gap: 2rem; }
 nav a {
     color: var(--text-light);
     text-decoration: none;
-    font-weight: 600;
+    letter-spacing: 1px;
     transition: color 0.3s ease;
 }
+nav a:hover { color: var(--neon-blue); }
+.logo-img { height: 35px; filter: drop-shadow(0 0 3px rgba(0, 243, 255, 0.3)); }
 
-nav a:hover {
-    color: var(--neon-blue);
-}
-
-.logo-img {
-    height: 35px;
-    filter: drop-shadow(0 0 3px rgba(0, 243, 255, 0.3)); 
-}
-
-/* --- Sección Principal ("Hero") --- */
+/* --- SECCIÓN HERO (PANTALLA COMPLETA) --- */
 .hero {
+    position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
     min-height: 100vh;
-    padding: 7rem 5% 3rem 5%;
-    position: relative;
+    width: 100vw;
+    padding: 0 5%;
+    overflow: hidden;
 }
 
-.hero-video-container {
-    width: 100%;
-    max-width: 900px;
-    height: 400px;
-    border-radius: 12px;
-    margin-bottom: 3rem;
-    background-color: var(--glass-bg);
-    border: 1px solid var(--glass-border); /* Borde sutil y elegante en vez de punteado */
-    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.6);
-    overflow: hidden; /* Esto es vital para que el video no tape las esquinas redondeadas */
-    transition: all 0.3s ease;
-}
-
-.hero-video-container:hover {
-    border-color: var(--neon-blue);
-    box-shadow: var(--neon-box-glow);
-}
-
-.hero-video {
+.hero-video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Hace que el video se adapte llenando el contenedor sin estirarse */
-    display: block;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.9) 100%);
+    z-index: -1;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 1;
+    margin-top: 60px;
 }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: 4rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
     color: var(--text-light);
-    font-weight: 800;
     text-shadow: var(--subtle-text-glow);
+    letter-spacing: 2px;
 }
 
-.hero h1 span {
-    color: var(--neon-blue); 
-}
+.hero h1 span { color: var(--neon-blue); }
 
-.hero p {
+.hero-slogan {
     color: var(--text-muted);
-    max-width: 700px;
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
 }
 
-/* --- Sección Sobre Mí --- */
+/* --- SECCIÓN SOBRE MÍ --- */
 .about-section {
-    padding: 5rem 5%;
+    padding: 6rem 5%;
     background-color: var(--dark-card-bg);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .about-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3rem; /* ANTES: 4rem (reducido para equilibrar el logo más grande) */
+    gap: 3rem;
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -154,26 +142,22 @@ nav a:hover {
 .profile-img-placeholder {
     width: 230px;
     height: 230px;
-    
     border-radius: 50%;
-    background-color: #000000; /* Antes era var(--glass-bg) */
-    
+    background-color: #000000;
     border: 2px solid #333;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #777;
     flex-shrink: 0;
-    transition: border-color 0.3s ease;
     overflow: hidden;
+    transition: border-color 0.3s ease;
 }
 
-/* Asegura que la imagen llene el nuevo tamaño del contenedor sin recortarse mal */
 .profile-img-placeholder img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Muestra el logo completo maximizando su tamaño */
-    padding: 10px; /* Pequeño margen interno para que no toque los bordes del círculo */
+    object-fit: contain;
+    padding: 10px;
 }
 
 .profile-img-placeholder:hover {
@@ -182,54 +166,73 @@ nav a:hover {
 }
 
 .about-text h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--neon-blue); 
     margin-bottom: 1rem;
-    text-transform: uppercase;
     text-shadow: var(--subtle-text-glow);
 }
 
-.about-text p {
-    font-size: 1.1rem;
-    color: var(--text-light);
-    margin-bottom: 0.8rem;
+/* Insignias Stack Tecnológico */
+.tech-stack {
+    display: flex;
+    gap: 12px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
 }
 
-/* --- Sección de Mis Proyectos --- */
-.games-section {
-    padding: 6rem 5%;
+.tech-badge {
+    background-color: rgba(0, 243, 255, 0.05);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    color: var(--neon-blue);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
+/* --- SECCIÓN DE PROYECTOS --- */
+.games-section { padding: 6rem 5%; }
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-bottom: 4rem;
     color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
     text-shadow: var(--subtle-text-glow);
 }
-
-.section-title span {
-    color: var(--neon-blue); 
-}
+.section-title span { color: var(--neon-blue); }
 
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
     max-width: 1100px;
     margin: 0 auto;
+}
+
+/* Modificador para Proyecto Destacado */
+.featured-project {
+    grid-column: 1 / -1; /* Ocupa todo el ancho disponible */
+}
+
+.featured-project .project-media-placeholder {
+    height: 300px; /* Más alto que los normales */
+}
+
+.row-buttons {
+    flex-direction: row !important;
+    justify-content: center;
 }
 
 .project-card {
     background-color: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
-    padding: 2rem;
+    padding: 2.5rem;
     text-align: center;
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px);
 }
 
 .project-card:hover {
@@ -243,8 +246,6 @@ nav a:hover {
     color: var(--neon-blue);
     padding: 5px 15px;
     border-radius: 20px;
-    text-transform: uppercase;
-    font-weight: 700;
     font-size: 0.8rem;
     position: absolute;
     top: 20px;
@@ -253,149 +254,81 @@ nav a:hover {
 }
 
 .project-media-placeholder {
-    height: 180px;
+    height: 200px;
     border: 2px dashed #444;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #777;
-    font-weight: bold;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin: 1.5rem 0;
     border-radius: 8px;
-    overflow: hidden; 
 }
 
-/* --- BOTONES DE PLATAFORMAS --- */
-.platform-btn-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 1rem;
-}
-
+/* Botones de Plataformas */
+.platform-btn-group { display: flex; flex-direction: column; gap: 12px; }
 .platform-btn {
-    padding: 12px;
+    padding: 12px 24px;
     text-decoration: none;
     border-radius: 6px;
-    font-weight: 800;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
     font-size: 0.9rem;
     letter-spacing: 1px;
     border: 2px solid transparent;
+    transition: all 0.3s ease;
 }
-
 .btn-gamejolt { background-color: #1a1a1a; color: #ccff00; border-color: #ccff00; }
 .btn-gamejolt:hover { background-color: #ccff00; color: #000; box-shadow: 0 0 15px rgba(204, 255, 0, 0.4); }
-
 .btn-itchio { background-color: #fa5c5c; color: #ffffff; }
 .btn-itchio:hover { background-color: #e04a4a; box-shadow: 0 0 15px rgba(250, 92, 92, 0.5); }
-
 .btn-youtube { background-color: #ff0000; color: #ffffff; }
 .btn-youtube:hover { background-color: #cc0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.5); }
-
 .btn-wattpad { background-color: #ff500a; color: #ffffff; }
 .btn-wattpad:hover { background-color: #e04608; box-shadow: 0 0 15px rgba(255, 80, 10, 0.5); }
-
 .btn-inkspired { background-color: #111a24; color: #00e5ff; border-color: #00e5ff; }
 .btn-inkspired:hover { background-color: #00e5ff; color: #000; box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); }
 
-/* --- Footer --- */
+/* --- FOOTER --- */
 footer {
     padding: 4rem 5% 2rem 5%;
-    background-color: var(--dark-bg);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
-.footer-content {
-    text-align: center;
-    max-width: 600px;
-    margin-bottom: 3rem;
-}
-
+.footer-content { text-align: center; max-width: 600px; margin-bottom: 3rem; }
 .reminder-box {
     background-color: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.05);
     padding: 1.5rem 2rem;
     border-radius: 8px;
 }
+.reminder-text { color: var(--text-muted); }
+.reminder-text strong { color: var(--text-light); }
+.smile { display: block; margin-top: 10px; color: var(--neon-blue); }
+.footer-bottom { width: 100%; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem; text-align: center; }
+.footer-credit { font-size: 0.85rem; color: #555; }
 
-.reminder-text {
-    color: var(--text-muted);
-    font-size: 1rem;
-    line-height: 1.6;
+/* --- ANIMACIONES DE SCROLL --- */
+.oculto {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.reminder-text strong {
-    color: var(--text-light);
-    font-weight: 600;
+.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.smile {
-    display: block;
-    margin-top: 10px;
-    color: var(--neon-blue);
-    font-weight: bold;
-}
-
-.footer-bottom {
-    width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 1.5rem;
-    text-align: center;
-}
-
-.footer-credit {
-    font-size: 0.85rem;
-    color: #555;
-}
-
-/* ==============================
-    RESPONSIVIDAD (Móviles y Tablets)
-    ============================== */
+/* --- RESPONSIVIDAD --- */
 @media (max-width: 900px) {
-    .games-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
-    }
-    
-    .about-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-    }
-
-    .hero h1 {
-        font-size: 2.8rem;
-    }
+    .hero h1 { font-size: 3rem; }
+    .about-container { flex-direction: column; text-align: center; }
+    .tech-stack { justify-content: center; }
 }
 
 @media (max-width: 600px) {
-    .games-grid {
-        grid-template-columns: 1fr; /* 1 columna en móviles */
-    }
-
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .hero-video-container {
-        height: 250px;
-    }
-
-    nav ul {
-        gap: 1rem;
-    }
-
-    header {
-        flex-direction: column;
-        gap: 15px;
-    }
+    .games-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero-slogan { font-size: 1rem; }
+    .row-buttons { flex-direction: column !important; }
+    header { flex-direction: column; gap: 15px; }
 }
