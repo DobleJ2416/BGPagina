@@ -191,8 +191,9 @@ nav a:hover { color: var(--neon-blue); }
     letter-spacing: 1px;
 }
 
-/* --- SECCIÓN DE PROYECTOS --- */
+/* --- SECCIÓN DE PROYECTOS (DESTACADO Y ZIG-ZAG) --- */
 .games-section { padding: 6rem 5%; }
+
 .section-title {
     text-align: center;
     font-size: 2.8rem;
@@ -202,89 +203,139 @@ nav a:hover { color: var(--neon-blue); }
 }
 .section-title span { color: var(--neon-blue); }
 
-.games-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-/* Modificador para Proyecto Destacado */
-.featured-project {
-    grid-column: 1 / -1; /* Ocupa todo el ancho disponible */
-}
-
-.featured-project .project-media-placeholder {
-    height: 300px; /* Más alto que los normales */
-}
-
-.row-buttons {
-    flex-direction: row !important;
-    justify-content: center;
-}
-
-.project-card {
-    background-color: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 2.5rem;
-    text-align: center;
-    position: relative;
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(5px);
-}
-
-.project-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--neon-blue);
-    box-shadow: var(--neon-box-glow);
-}
-
+/* Etiquetas de categoría */
 .project-type-label {
     background-color: rgba(0, 243, 255, 0.1);
     color: var(--neon-blue);
-    padding: 5px 15px;
+    padding: 6px 18px;
     border-radius: 20px;
     font-size: 0.8rem;
-    position: absolute;
-    top: 20px;
-    right: 20px;
     border: 1px solid var(--neon-blue);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.absolute-label { position: absolute; top: 20px; right: 20px; z-index: 10; }
+.static-label { display: inline-block; margin-bottom: 1rem; }
+
+/* Grupo de botones en fila */
+.row-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+.center-buttons { justify-content: center; }
+
+/* --- 1. PROYECTO DESTACADO --- */
+.featured-project-container {
+    max-width: 1100px;
+    margin: 0 auto 6rem auto;
+}
+.featured-project {
+    background-color: var(--glass-bg);
+    border: 1px solid var(--neon-blue); /* Borde especial brillante */
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--neon-box-glow);
+    position: relative;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.featured-project:hover { transform: translateY(-5px); }
+
+.featured-media {
+    width: 100%;
+    height: 450px;
+    position: relative;
+}
+.featured-info {
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--glass-border);
+}
+.featured-info h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
 }
 
-.project-media-placeholder {
-    height: 200px;
-    border: 2px dashed #444;
+/* --- 2. RECORRIDO ZIG-ZAG --- */
+.zigzag-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem; /* Espacio grande entre cada proyecto */
+}
+
+.zigzag-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #777;
-    margin: 1.5rem 0;
-    border-radius: 8px;
+    gap: 4rem;
 }
 
-/* Botones de Plataformas */
-.platform-btn-group { display: flex; flex-direction: column; gap: 12px; }
-.platform-btn {
-    padding: 12px 24px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
+/* La clase reverse invierte el orden para Animaciones */
+.zigzag-item.reverse {
+    flex-direction: row-reverse;
 }
-.btn-gamejolt { background-color: #1a1a1a; color: #ccff00; border-color: #ccff00; }
-.btn-gamejolt:hover { background-color: #ccff00; color: #000; box-shadow: 0 0 15px rgba(204, 255, 0, 0.4); }
-.btn-itchio { background-color: #fa5c5c; color: #ffffff; }
-.btn-itchio:hover { background-color: #e04a4a; box-shadow: 0 0 15px rgba(250, 92, 92, 0.5); }
-.btn-youtube { background-color: #ff0000; color: #ffffff; }
-.btn-youtube:hover { background-color: #cc0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.5); }
-.btn-wattpad { background-color: #ff500a; color: #ffffff; }
-.btn-wattpad:hover { background-color: #e04608; box-shadow: 0 0 15px rgba(255, 80, 10, 0.5); }
-.btn-inkspired { background-color: #111a24; color: #00e5ff; border-color: #00e5ff; }
-.btn-inkspired:hover { background-color: #00e5ff; color: #000; box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); }
+
+.zigzag-media {
+    flex: 1.2; /* El video/imagen ocupa un poco más de espacio que el texto */
+    height: 320px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+.zigzag-media:hover {
+    transform: scale(1.03);
+    border-color: var(--neon-blue);
+}
+
+.media-fill {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Adapta el video/imagen sin deformarlo */
+    display: block;
+}
+
+.zigzag-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.left-align { align-items: flex-start; text-align: left; }
+.right-align { align-items: flex-end; text-align: right; }
+
+.zigzag-info h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+.zigzag-info p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* --- RESPONSIVIDAD (Actualiza la parte de móviles) --- */
+@media (max-width: 900px) {
+    .zigzag-item, .zigzag-item.reverse {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .zigzag-info.left-align, .zigzag-info.right-align {
+        align-items: center;
+        text-align: center;
+    }
+    .row-buttons { justify-content: center; }
+    .featured-media { height: 280px; }
+    .zigzag-media { width: 100%; height: 250px; }
+}
 
 /* --- FOOTER --- */
 footer {
